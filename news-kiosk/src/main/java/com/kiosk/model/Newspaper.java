@@ -11,6 +11,9 @@ public class Newspaper extends Publication {
         this.date = date;
     }
 
+    @Override
+    public String getType() { return "NEWSPAPER"; }
+
     public int getIssueNumber() { return issueNumber; }
     public String getDate() { return date; }
     public void setIssueNumber(int issueNumber) { this.issueNumber = issueNumber; }

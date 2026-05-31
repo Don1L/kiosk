@@ -11,6 +11,9 @@ public class Magazine extends Publication {
         this.monthYear = monthYear;
     }
 
+    @Override
+    public String getType() { return "MAGAZINE"; }
+
     public int getIssueNumber() { return issueNumber; }
     public String getMonthYear() { return monthYear; }
     public void setIssueNumber(int issueNumber) { this.issueNumber = issueNumber; }

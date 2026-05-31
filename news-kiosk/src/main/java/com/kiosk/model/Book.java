@@ -11,6 +11,9 @@ public class Book extends Publication {
         this.isbn = isbn;
     }
 
+    @Override
+    public String getType() { return "BOOK"; }
+
     public String getAuthor() { return author; }
     public String getIsbn() { return isbn; }
     public void setAuthor(String author) { this.author = author; }
