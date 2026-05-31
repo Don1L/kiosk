@@ -1,6 +1,9 @@
 package com.kiosk.ui;
 
-import com.kiosk.model.*;
+import com.kiosk.model.Book;
+import com.kiosk.model.Magazine;
+import com.kiosk.model.Newspaper;
+import com.kiosk.model.Publication;
 import com.kiosk.service.PublicationService;
 
 import java.util.List;
