@@ -50,7 +50,6 @@ public class ConsoleUI {
         System.out.println("0. Выход");
     }
 
-    // приёмка
     private void handleReceive() {
         System.out.println("\nТип товара: 1-Газета, 2-Журнал, 3-Книга");
         int type = reader.readInt("Тип: ");
@@ -86,7 +85,6 @@ public class ConsoleUI {
         }
     }
 
-    // продажа
     private void handleSell() {
         long id = reader.readLong("ID товара: ");
         int quantity = reader.readInt("Количество: ");
@@ -98,7 +96,6 @@ public class ConsoleUI {
         }
     }
 
-    // редакт
     private void handleEdit() {
         long id = reader.readLong("ID товара: ");
         service.findById(id).ifPresentOrElse(p -> {
@@ -139,7 +136,6 @@ public class ConsoleUI {
         }, () -> System.out.println("Товар не найден."));
     }
 
-    // удаление
     private void handleRemove() {
         long id = reader.readLong("ID товара: ");
         try {
@@ -150,7 +146,6 @@ public class ConsoleUI {
         }
     }
 
-    // список
     private void handleList() {
         List<Publication> all = service.findAll();
         if (all.isEmpty()) {
