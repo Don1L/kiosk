@@ -74,7 +74,7 @@ public class PublicationServlet extends HttpServlet {
         long id = Long.parseLong(req.getParameter("id"));
         service.findById(id).ifPresentOrElse(p -> {
             req.setAttribute("publication", p);
-            req.setAttribute("type", p.getClass().getSimpleName().toUpperCase());
+            req.setAttribute("type", p.getType());
             req.setAttribute("formAction", "update");
             try {
                 req.getRequestDispatcher("/WEB-INF/views/form.jsp").forward(req, resp);
