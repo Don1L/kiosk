@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PublicationService {
-    long receive(Publication publication);         // приёмка товара, возвращает присвоенный ID
-    void sell(long id, int quantity);             // продажа
-    void edit(Publication publication);           // редактирование
-    void remove(long id);                         // удаление
+    long receive(Publication publication);
+    void sell(long id, int quantity);
+    void edit(Publication publication);
+    void remove(long id);
     Optional<Publication> findById(long id);
     List<Publication> findAll();
 }
