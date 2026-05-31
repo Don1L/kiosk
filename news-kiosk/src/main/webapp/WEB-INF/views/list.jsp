@@ -68,7 +68,7 @@
                         <button type="submit">Продать</button>
                     </form>
                     &nbsp;
-                    <a href="${pageContext.request.contextPath}/publications?action=edit&id=${p.id}">
+                    <a href="${pageContext.request.contextPath}/publications?action=edit&amp;id=${p.id}">
                         Изменить
                     </a>
                     &nbsp;
