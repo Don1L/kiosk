@@ -4,14 +4,19 @@ import com.kiosk.model.Publication;
 import com.kiosk.repository.PublicationRepository;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryPublicationRepository implements PublicationRepository {
 
     private final Map<Long, Publication> storage = new HashMap<>();
+    private final AtomicLong idCounter = new AtomicLong(0);
 
     @Override
-    public void save(Publication publication) {
-        storage.put(publication.getId(), publication);
+    public long save(Publication publication) {
+        long id = idCounter.incrementAndGet();
+        publication.setId(id);
+        storage.put(id, publication);
+        return id;
     }
 
     @Override
