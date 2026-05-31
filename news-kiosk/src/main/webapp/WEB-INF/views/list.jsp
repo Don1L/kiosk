@@ -16,9 +16,9 @@
 
 <p>
     Добавить:
-    <a href="${pageContext.request.contextPath}/publications?action=newForm&type=NEWSPAPER">Газету</a> |
-    <a href="${pageContext.request.contextPath}/publications?action=newForm&type=MAGAZINE">Журнал</a> |
-    <a href="${pageContext.request.contextPath}/publications?action=newForm&type=BOOK">Книгу</a>
+    <a href="${pageContext.request.contextPath}/publications?action=newForm&amp;type=NEWSPAPER">Газету</a> |
+    <a href="${pageContext.request.contextPath}/publications?action=newForm&amp;type=MAGAZINE">Журнал</a> |
+    <a href="${pageContext.request.contextPath}/publications?action=newForm&amp;type=BOOK">Книгу</a>
 </p>
 
 <table border="1" cellpadding="6" cellspacing="0">
