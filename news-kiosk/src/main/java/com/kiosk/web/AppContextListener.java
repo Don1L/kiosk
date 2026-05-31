@@ -31,7 +31,9 @@ public class AppContextListener implements ServletContextListener {
                     props.getProperty("db.user"),
                     props.getProperty("db.password")
             );
-            connection.createStatement().execute("SET client_encoding TO 'UTF8'");
+            try (java.sql.Statement st = connection.createStatement()) {
+                st.execute("SET client_encoding TO 'UTF8'");
+            }
             PublicationRepository repository = new JdbcPublicationRepository(connection);
             PublicationService service = new PublicationServiceImpl(repository);
             sce.getServletContext().setAttribute("service", service);
