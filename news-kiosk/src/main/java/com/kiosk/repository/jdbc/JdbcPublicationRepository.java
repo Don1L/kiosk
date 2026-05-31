@@ -55,7 +55,7 @@ public class JdbcPublicationRepository implements PublicationRepository {
                     publication.setId(id);
                     return id;
                 }
-                throw new DataAccessException("No generated key returned after insert", null);
+                throw new DataAccessException("No generated key returned after insert");
             }
         } catch (SQLException e) {
             throw new DataAccessException("Failed to save publication", e);
@@ -119,31 +119,24 @@ public class JdbcPublicationRepository implements PublicationRepository {
     }
 
     private void fillStatement(PreparedStatement ps, Publication publication) throws SQLException {
+        ps.setString(1, publication.getType());
+        ps.setString(2, publication.getTitle());
+        ps.setDouble(3, publication.getPrice());
+        ps.setInt(4, publication.getQuantity());
+
         if (publication instanceof Newspaper n) {
-            ps.setString(1, "NEWSPAPER");
-            ps.setString(2, n.getTitle());
-            ps.setDouble(3, n.getPrice());
-            ps.setInt(4, n.getQuantity());
             ps.setInt(5, n.getIssueNumber());
             ps.setString(6, n.getDate());
             ps.setNull(7, Types.VARCHAR);
             ps.setNull(8, Types.VARCHAR);
             ps.setNull(9, Types.VARCHAR);
         } else if (publication instanceof Magazine m) {
-            ps.setString(1, "MAGAZINE");
-            ps.setString(2, m.getTitle());
-            ps.setDouble(3, m.getPrice());
-            ps.setInt(4, m.getQuantity());
             ps.setInt(5, m.getIssueNumber());
             ps.setNull(6, Types.VARCHAR);
             ps.setString(7, m.getMonthYear());
             ps.setNull(8, Types.VARCHAR);
             ps.setNull(9, Types.VARCHAR);
         } else if (publication instanceof Book b) {
-            ps.setString(1, "BOOK");
-            ps.setString(2, b.getTitle());
-            ps.setDouble(3, b.getPrice());
-            ps.setInt(4, b.getQuantity());
             ps.setNull(5, Types.INTEGER);
             ps.setNull(6, Types.VARCHAR);
             ps.setNull(7, Types.VARCHAR);
