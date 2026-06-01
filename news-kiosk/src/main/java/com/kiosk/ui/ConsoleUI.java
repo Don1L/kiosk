@@ -1,6 +1,9 @@
 package com.kiosk.ui;
 
-import com.kiosk.model.*;
+import com.kiosk.model.Book;
+import com.kiosk.model.Magazine;
+import com.kiosk.model.Newspaper;
+import com.kiosk.model.Publication;
 import com.kiosk.service.PublicationService;
 
 import java.util.List;
@@ -47,12 +50,10 @@ public class ConsoleUI {
         System.out.println("0. Выход");
     }
 
-    // приёмка
     private void handleReceive() {
         System.out.println("\nТип товара: 1-Газета, 2-Журнал, 3-Книга");
         int type = reader.readInt("Тип: ");
 
-        long id = reader.readLong("ID: ");
         String title = reader.readString("Название: ");
         double price = reader.readDouble("Цена: ");
         int quantity = reader.readInt("Количество: ");
@@ -62,29 +63,28 @@ public class ConsoleUI {
                 case 1 -> {
                     int issue = reader.readInt("Номер выпуска: ");
                     String date = reader.readString("Дата (DD.MM.YYYY): ");
-                    yield new Newspaper(id, title, price, quantity, issue, date);
+                    yield new Newspaper(0, title, price, quantity, issue, date);
                 }
                 case 2 -> {
                     int issue = reader.readInt("Номер выпуска: ");
                     String monthYear = reader.readString("Месяц/Год (MM/YYYY): ");
-                    yield new Magazine(id, title, price, quantity, issue, monthYear);
+                    yield new Magazine(0, title, price, quantity, issue, monthYear);
                 }
                 case 3 -> {
                     String author = reader.readString("Автор: ");
                     String isbn = reader.readString("ISBN: ");
-                    yield new Book(id, title, price, quantity, author, isbn);
+                    yield new Book(0, title, price, quantity, author, isbn);
                 }
                 default -> throw new IllegalArgumentException("Неверный тип товара");
             };
 
-            service.receive(publication);
-            System.out.println("Товар принят.");
+            long assignedId = service.receive(publication);
+            System.out.println("Товар принят. Присвоен ID: " + assignedId);
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
 
-    // продажа
     private void handleSell() {
         long id = reader.readLong("ID товара: ");
         int quantity = reader.readInt("Количество: ");
@@ -96,7 +96,6 @@ public class ConsoleUI {
         }
     }
 
-    // редакт
     private void handleEdit() {
         long id = reader.readLong("ID товара: ");
         service.findById(id).ifPresentOrElse(p -> {
@@ -137,7 +136,6 @@ public class ConsoleUI {
         }, () -> System.out.println("Товар не найден."));
     }
 
-    // удаление
     private void handleRemove() {
         long id = reader.readLong("ID товара: ");
         try {
@@ -148,7 +146,6 @@ public class ConsoleUI {
         }
     }
 
-    // список
     private void handleList() {
         List<Publication> all = service.findAll();
         if (all.isEmpty()) {

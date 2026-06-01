@@ -17,16 +17,8 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
-    public void receive(Publication publication) {
-        Optional<Publication> existing = repository.findById(publication.getId());
-        if (existing.isPresent()) {
-            // уже есть — просто увеличиваем количество
-            Publication p = existing.get();
-            p.setQuantity(p.getQuantity() + publication.getQuantity());
-            repository.update(p);
-        } else {
-            repository.save(publication);
-        }
+    public long receive(Publication publication) {
+        return repository.save(publication);
     }
 
     @Override
