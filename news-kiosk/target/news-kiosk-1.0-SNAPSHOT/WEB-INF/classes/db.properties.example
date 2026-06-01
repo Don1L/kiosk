@@ -1,3 +1,0 @@
-db.url=jdbc:postgresql://localhost:5432/kiosk
-db.user=your_user
-db.password=your_password
